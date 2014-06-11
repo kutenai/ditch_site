@@ -1,7 +1,5 @@
 # Django settings for ditch project.
 
-import os
-import sys
 from unipath import Path
 
 DEBUG = True
@@ -10,6 +8,7 @@ TEMPLATE_DEBUG = DEBUG
 DJANGO_ROOT = Path(__file__).ancestor(3)
 
 SITE_ROOT = DJANGO_ROOT.ancestor(1)
+print("Site root:%s" % SITE_ROOT)
 
 ADMINS = (
     ('Ed Henderson', 'kutenai@me.com'),
@@ -58,7 +57,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
-MEDIA_ROOT = SITE_ROOT.child('site_media')
+MEDIA_ROOT = ''
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -69,7 +68,7 @@ MEDIA_URL = '/site_media/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = SITE_ROOT.child('collectedstatic')
+STATIC_ROOT = DJANGO_ROOT.child('static')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -155,6 +154,7 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
 
     'rest_framework',
+    'account',
     'south',
 
     'ditch',
