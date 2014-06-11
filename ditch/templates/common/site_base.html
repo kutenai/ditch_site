@@ -46,11 +46,15 @@
 {% block wrapper_class %}wrapper{% endblock %}
 
 {% block header_bar_base %}
+    {% comment %}
     {% include "common/header.html" %}
+    {% endcomment %}
 {% endblock header_bar_base %}
 
 {% block footer_base %}
+    {% comment %}
     {% include "common/footer.html" %}
+    {% endcomment %}
 {% endblock %}
 
 {% block extra_script %}

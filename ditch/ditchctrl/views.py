@@ -1,15 +1,14 @@
-# Create your views here.
+from __future__ import absolute_import
 
 import os
 import sys
 
-from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 
-from Ditch.Controller import DitchController
+from ditchtasks.tasks import status,pump_enable, north_enable, south_enable
 
 class JSONResponse(HttpResponse):
     """
@@ -27,26 +26,29 @@ def index(request):
     List all code nurseries, or create a new snippet.
     """
     if request.method == 'GET':
-        d = DitchController()
-        stat = d.getSystemStatus()
-        return JSONResponse(stat, status=201)
+        r = status.delay()
+        try:
+            stat  = r.get(timeout=10)
+            return JSONResponse(stat, status=201)
+        except:
+            return JSONResponse({}, status=200)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         if data.has_key('zone'):
-            d = DitchController()
             zone = data['zone']
             if zone == 'north':
-                d.runNorth()
+                north_enable.delay(True)
             elif zone == 'south':
-                d.runSouth()
+                south_enable.delay(True)
 
         return JSONResponse({}, status=201)
 
     elif request.method == 'DELETE':
         print("Deleting. or stopping it")
-        d = DitchController()
-        d.allOff()
+        pump_enable.delay(False)
+        north_enable.delay(False)
+        south_enable.delay(False)
         return JSONResponse({}, status=201)
 
 @csrf_exempt
@@ -55,26 +57,14 @@ def levels(request):
     List all code nurseries, or create a new snippet.
     """
     if request.method == 'GET':
-        d = DitchController()
-        stat = d.getSystemStatus()
-        return JSONResponse(stat, status=201)
+        r = status.delay()
+        try:
+            stat  = r.get(timeout=10)
+            return JSONResponse(stat, status=201)
+        except:
+            return JSONResponse({}, status=200)
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        if data.has_key('zone'):
-            d = DitchController()
-            zone = data['zone']
-            if zone == 'north':
-                d.runNorth()
-            elif zone == 'south':
-                d.runSouth()
-
-        return JSONResponse({}, status=201)
-
-    elif request.method == 'DELETE':
-        print("Deleting. or stopping it")
-        d = DitchController()
-        d.allOff()
+    else:
         return JSONResponse({}, status=201)
 
 

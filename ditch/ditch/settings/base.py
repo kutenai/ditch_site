@@ -10,10 +10,6 @@ TEMPLATE_DEBUG = DEBUG
 DJANGO_ROOT = Path(__file__).ancestor(3)
 
 SITE_ROOT = DJANGO_ROOT.ancestor(1)
-SCRIPT_ROOT = SITE_ROOT.child('scripts')
-print("Added script root:%s" % SCRIPT_ROOT)
-
-sys.path.append(SCRIPT_ROOT)
 
 ADMINS = (
     ('Ed Henderson', 'kutenai@me.com'),
