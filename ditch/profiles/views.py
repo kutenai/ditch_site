@@ -22,7 +22,7 @@ from .forms import (
     LoginForm
 )
 
-from ditchlib.view_utils import DitchMixin,get_redirect
+from ditchlib.util.view import DitchMixin,get_redirect
 
 class SignUpView(DitchMixin,v.SignupView):
     template_name = "signup.html"

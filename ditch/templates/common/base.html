@@ -14,6 +14,13 @@
         {% block extra_style %}{% endblock %}
     {% endblock %}
 
+    {% block html5shim %}
+        <!-- HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+                    <script src="{% static 'pinax/js/html5shiv.js' %}"></script>
+                <![endif]-->
+    {% endblock %}
+
     {% block head_script %}
     {% endblock %}
 
@@ -35,12 +42,29 @@
             </div>
         {% endblock header_bar_base %}
 
+        {% block page_header_base %}
+            <section class="page_header">
+                <h3>Boise Ditch Company</h3>
+                {% block page_header_bottom %}
+                    {% comment %}
+                    <div class="page_header_bottom">
+                        <nav>
+                            <a href="{% url 'gardentips' %}">BEGINNER'S GUIDE TO GARDENING</a>
+                            <a href="{% url 'featured_gardeners' %}">FEATURED GARDENS</a>
+                            <a href="{% url 'nurseries' %}">TREASURE VALLEY NURSERIES</a>
+                        </nav>
+                    </div>
+                    {% endcomment %}
+                {% endblock page_header_bottom %}
+            </section>
+        {% endblock page_header_base %}
+
         {% block body_base %}
-            <div class="container">
+            <section class="container">
                 {% include "_messages.html" %}
                 {% block body %}
                 {% endblock body %}
-            </div>
+            </section>
         {% endblock body_base %}
 
         {% block footer_base %}

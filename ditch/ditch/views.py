@@ -2,21 +2,15 @@
 from __future__ import absolute_import
 
 from django.views.generic import TemplateView,FormView
+from ditchlib.util.view import LoginReqMixin
 
-class HomeView(TemplateView):
+class HomeView(LoginReqMixin,TemplateView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
         context = super(HomeView,self).get_context_data(**kwargs)
 
-        info = {
-            'ditch_inches' : 12.2,
-            'sump_inches'  : 14.3,
-            'pump_on'       : False,
-            'north_on'      : False,
-            'south_on'      : False
-        }
-        context['info'] = info
+        context['angularapp'] = 'ditchapp'
         return context
 
 class AboutView(TemplateView):

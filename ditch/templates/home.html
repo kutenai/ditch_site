@@ -11,48 +11,23 @@
         <button ng-click="ditchStop()">Stop</button>
 
         <ul>
-            <li>Ditch Level:{{ info.ditch_inches }}</li>
-            <li>Sump Level:{{ info.sump_inches }}</li>
-            <li>Pump Status:{{ info.pump_on}}</li>
-            <li>North Status:{{ info.north_on}}</li>
-            <li>South Status:{{ info.south_on}}</li>
+            <li>Ditch Level:<span ng-bind="info.ditch_inches"></span></li>
+            <li>Sump Level:<span ng-bind="info.sump_inches"></span></li>
+            <li>Pump Status:<span ng-bind="info.pump_on"></span></li>
+            <li>North Status:<span ng-bind="info.north_on"></span></li>
+            <li>South Status:<span ng-bind="info.south_on"></span></li>
         </ul>
     </div>
-
-    <div id="container" ng-controller="LogController">
-
-    </div>
-
 
 {% endblock body %}
 
 {% block angular_script %}
     {{ block.super }}
-    <script src="{% static 'js/DitchClient.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/DitchClient.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/DitchLib/DitchMain.js' %}" type="text/javascript"></script>
-{% endblock %}
-
-{% block ditch_script %}
-    <script type="text/javascript">
-        BasePath = "/static/js/";
-        StaticPath = "/static";
-        AngularPartialsBase = '/static/partials';
-    </script>
-
-    <script type="text/javascript">
-        DitchClient.URLS = _.defaults(DitchClient.URLS,{
-            'home' : '{% url "home" %}',
-            'about' : '{% url "about" %}',
-            'contact' : '{% url "contact" %}'
-        });
-    </script>
-
-    <script src="{% static 'js/DitchLoad.js' %}" type="text/javascript"></script>
+    <script type="text/javascript" src="{% static 'js/angular/apps/ditchapp.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/angular/controllers/DitchController.js' %}"></script>
 {% endblock %}
 
 
 {% block footer %}
-<h3>Ya'll come back soon!</h3>
-
+<h3>Thanks for dropping by.</h3>
 {% endblock %}

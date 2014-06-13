@@ -29,6 +29,7 @@ class DitchMixin(object):
         return context
 
 class LoginReqMixin(object):
+    u""" Insure user is logged in before accessing the view """
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):

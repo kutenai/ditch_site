@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 
+from django.conf import settings
 from ditch.admin import site
 from django.contrib import admin
 admin.autodiscover()
@@ -11,7 +12,7 @@ from profiles.views import (
     PasswordResetView,
     ChangePasswordView
 )
-from ditchlib.view_utils import logout_user
+from ditchlib.util.view import logout_user
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(),name='home'),
@@ -20,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^about/', AboutView.as_view(),name='about'),
     url(r'^contact/', AboutView.as_view(),name='contact'),
     url(r"^admin/", include(site.urls)),
+    url(r"^api/%s/" % settings.API_VERSION, include('ditchapi.urls',namespace='api')),
 )
 
 urlpatterns += patterns('',

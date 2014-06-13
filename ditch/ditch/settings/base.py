@@ -9,6 +9,7 @@ DJANGO_ROOT = Path(__file__).ancestor(3)
 
 SITE_ROOT = DJANGO_ROOT.ancestor(1)
 print("Site root:%s" % SITE_ROOT)
+print("Django Root:%s" % DJANGO_ROOT)
 
 ADMINS = (
     ('Ed Henderson', 'kutenai@me.com'),
@@ -30,6 +31,8 @@ DATABASES = {
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
+
+API_VERSION = 'v1'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -68,7 +71,8 @@ MEDIA_URL = '/site_media/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = DJANGO_ROOT.child('static')
+STATIC_ROOT = ''
+
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -79,6 +83,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    DJANGO_ROOT.child('static'),
 )
 
 # List of finder classes that know how to find static files in
