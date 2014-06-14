@@ -6,9 +6,9 @@
     <h1>Boise Ditch Company</h1>
 
     <div id='ditchcontrol'  ng-controller='DitchController'>
-        <button ng-click="ditchStart('north')">Start North</button>
-        <button ng-click="ditchStart('south')">Start South</button>
-        <button ng-click="ditchStop()">Stop</button>
+        <button ng-click="northToggle()" ng-bind="northButton"></button>
+        <button ng-click="southToggle()" ng-bind="southButton"></button>
+        <button ng-click="pumpToggle()" ng-bind="pumpButton"></button>
 
         <ul>
             <li>Ditch Level:<span ng-bind="info.ditch_inches"></span></li>

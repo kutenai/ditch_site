@@ -8,23 +8,61 @@
 app.controller('DitchController',
     ['$scope','$http','$interval',
         function($scope, $http,$interval) {
-        $scope.info = {
-            ditch_inches    : 12.3,
-            sump_inches     : 19.1,
-            pump_on         : false,
-            north_on        : false,
-            south_on        : false
-        };
+            $scope.info = {
+                ditch_inches: 12.3,
+                sump_inches:  19.1,
+                pump_on:      false,
+                north_on:     false,
+                south_on:     false
+            };
+            $scope.northButton = "North On";
+            $scope.southButton = "South On";
+            $scope.pumpButton = "Pump On";
 
-        $http.get('/api/v1/status/').success(function(data) {
-            $scope.info = data;
-        });
+            function onStatus(status) {
+                $scope.info = status;
 
-        $interval(function() {
-            $http.get('/api/v1/status/').success(function(data) {
-                $scope.info = data;
+                if (status.north_call) {
+                    $scope.northButton = "North Off";
+                } else {
+                    $scope.northButton = "North On";
+                }
+            };
+
+            $http.get('/api/v1/status/').success(function (data) {
+                onStatus(data);
             });
-        }, DitchParams.statusPollRate);
-    }]
+
+            $interval(function () {
+                $http.get('/api/v1/status/').success(function (data) {
+                    onStatus(data);
+                });
+            }, DitchParams.statusPollRate);
+
+            $scope.northToggle = function () {
+                if ($scope.info.north_call) {
+                    $http.post('/api/v1/north/off/').success(function () {});
+                } else {
+                    $http.post('/api/v1/north/on/').success(function () {});
+                }
+            };
+
+            $scope.southToggle = function () {
+                if ($scope.info.south_call) {
+                    $http.post('/api/v1/south/off/').success(function () {});
+                } else {
+                    $http.post('/api/v1/south/on/').success(function () {});
+                }
+            };
+
+            $scope.pumpToggle = function () {
+                if ($scope.info.pump_call) {
+                    $http.post('/api/v1/pump/off/').success(function () {});
+                } else {
+                    $http.post('/api/v1/pump/on/').success(function () {});
+                }
+            };
+        }
+    ]
 );
 
