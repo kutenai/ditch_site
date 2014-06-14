@@ -6,8 +6,8 @@
  */
 
 app.controller('DitchController',
-    ['$scope','$http',
-        function($scope, $http) {
+    ['$scope','$http','$interval',
+        function($scope, $http,$interval) {
         $scope.info = {
             ditch_inches    : 12.3,
             sump_inches     : 19.1,
@@ -16,9 +16,15 @@ app.controller('DitchController',
             south_on        : false
         };
 
-        $http.get('/api/v1/gardeners/').success(function(data) {
-            $scope.gardeners = data;
+        $http.get('/api/v1/status/').success(function(data) {
+            $scope.info = data;
         });
+
+        $interval(function() {
+            $http.get('/api/v1/status/').success(function(data) {
+                $scope.info = data;
+            });
+        }, DitchParams.statusPollRate);
     }]
 );
 

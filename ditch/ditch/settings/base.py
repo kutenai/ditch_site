@@ -222,3 +222,5 @@ CELERY_DISABLE_RATE_LIMITS = True
 CELERY_ROUTES = {
     'dbtasks.tasks.onstatus': {'queue': 'db'}
 }
+
+DITCH_POLL_RATE = 5000

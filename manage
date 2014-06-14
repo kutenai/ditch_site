@@ -1,0 +1,12 @@
+#!/bin/bash
+
+envname=ditchdj
+
+pushd ditch
+
+$WORKON_HOME/$envname/bin/python2.7 manage.py "$@"
+
+popd
+
+
+

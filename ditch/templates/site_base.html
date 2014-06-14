@@ -82,9 +82,9 @@
     {% block ditch_script %}
         <!-- site_base.html: gardenbuzz_script -->
         <script type="text/javascript">
-            BasePath = "/static/js/";
-            StaticPath = "/static/";
-            AngularPartialsBase = '/static/partials/';
+            var BasePath = "/static/js/";
+            var StaticPath = "/static/";
+            var AngularPartialsBase = '/static/partials/';
         </script>
 
         <script src="{% static 'js/DitchClient.js' %}" type="text/javascript"></script>
@@ -96,6 +96,8 @@
                 'about' : "{% url "about" %}",
                 'contact' : "{% url "contact" %}"
             });
+
+            var DitchParams = (typeof DitchParams  == 'undefined') ? {} : DitchParams;
         </script>
 
 
