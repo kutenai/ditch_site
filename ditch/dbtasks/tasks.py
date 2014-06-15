@@ -3,6 +3,9 @@ from __future__ import absolute_import
 import json
 
 from celery import shared_task
+from celery.utils.log import get_task_logger
+
+logger = get_task_logger('ditch')
 
 @shared_task()
 def onstatus(st):
@@ -28,7 +31,7 @@ def onstatus(st):
 
     ll.save()
 
-    print("Inserted new status entry.")
+    logger.info("Inserted new status entry.")
 
-    return "Success"
+    return {"Status" : "Success"}
 

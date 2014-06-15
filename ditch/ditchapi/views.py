@@ -19,13 +19,20 @@ class StatusView(BASEAPIListView):
         print("Query Status..")
         r = status.delay()
 
+        print("User-Agent:%s" % request.META.get('HTTP_USER_AGENT'),'None')
+
         try:
             stat = r.get(timeout=10)
-            full_status = json.loads(stat)
+            full_status = json.loads(stat) \
+
+            dlvl = full_status.get('Ditch','0.0')
+            slvl = full_status.get('Sump','0.0')
 
             ditch_status = {
-                'ditch_inches' : self.cal.ditch_inches(full_status.get('Ditch','0.0')),
-                'sump_inches'  : self.cal.sump_inches(full_status.get('Sump','0.0')),
+                'ditch_reading': dlvl,
+                'sump_reading' : slvl,
+                'ditch_inches' : self.cal.ditch_inches(dlvl),
+                'sump_inches'  : self.cal.sump_inches(slvl),
                 'pump_on'      : full_status.get('P','0') == '1',
                 'north_on'     : full_status.get('N','0') == '1',
                 'south_on'     : full_status.get('S','0') == '1',
