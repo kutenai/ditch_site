@@ -19,6 +19,8 @@ class StatusView(BASEAPIListView):
         print("Query Status..")
         r = status.delay()
 
+        self.cal.updateValues()
+
         print("User-Agent:%s" % request.META.get('HTTP_USER_AGENT'),'None')
 
         try:

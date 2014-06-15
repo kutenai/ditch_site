@@ -8,11 +8,15 @@ class DitchCalibration(object):
     def __init__(self):
 
         # Bogus default values.
-        self.doffset = 2.2
-        self.dscale = 0.2
+        self.d_offset = 2.2
+        self.d_scale = 0.2
 
         self.s_offset = 3.2
         self.s_scale = 0.4
+
+        self.updateValues()
+
+    def updateValues(self):
 
         try:
             e = DitchCal.objects.all()
@@ -30,6 +34,7 @@ class DitchCalibration(object):
 
 
 
+
     def ditch_inches(self,ditch_val):
         """
          Calculate inches from info data.
@@ -42,7 +47,7 @@ class DitchCalibration(object):
         except:
             val = 0.0
 
-        return (val * self.dscale) + self.doffset
+        return (val * self.d_scale) + self.d_offset
 
 
     def sump_inches(self,sump_val):
