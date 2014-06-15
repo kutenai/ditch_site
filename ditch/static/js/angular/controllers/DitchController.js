@@ -13,7 +13,12 @@ app.controller('DitchController',
                 sump_inches:  19.1,
                 pump_on:      false,
                 north_on:     false,
-                south_on:     false
+                south_on:     false,
+                pump_call:    false,
+                north_call:   false,
+                south_call:   false,
+                ditch_reading: 0.0,
+                sump_reading: 0.0
             };
             $scope.northButton = "North On";
             $scope.southButton = "South On";
