@@ -1,9 +1,8 @@
+from __future__ import absolute_import
 # Django settings for ditch project.
 
 from unipath import Path
-
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+from celery.schedules import crontab
 
 DJANGO_ROOT = Path(__file__).ancestor(3)
 
@@ -166,6 +165,9 @@ INSTALLED_APPS = (
     'ditchmon',
     'ditchctrl',
 
+    'dbtasks',
+    'ditchtasks',
+
     #'messages',
 )
 
@@ -221,6 +223,13 @@ CELERY_DISABLE_RATE_LIMITS = True
 
 CELERY_ROUTES = {
     'dbtasks.tasks.onstatus': {'queue': 'db'}
+}
+
+CELERYBEAT_SCHEDULE = {
+    'update-ditch-db' : {
+        'task' : 'dbtasks.tasks.update_database',
+        'schedule' : crontab(minute='*/1')
+    }
 }
 
 DITCH_POLL_RATE = 5000

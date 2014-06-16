@@ -15,7 +15,7 @@ class DitchCal(models.Model):
     sump_scale      = models.FloatField()
 
 class DitchLog(models.Model):
-    timestamp       = models.DateTimeField()
+    timestamp       = models.DateTimeField(auto_now=True)
     ditchlvl        = models.IntegerField()
     sumplvl         = models.IntegerField()
     pump_call       = models.BooleanField()

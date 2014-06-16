@@ -2,17 +2,27 @@ from __future__ import absolute_import
 
 import json
 
-from celery import shared_task
+from celery import shared_task,chain
+from ditchtasks.tasks import status
+
 from celery.utils.log import get_task_logger
 
 logger = get_task_logger('ditch')
+
+@shared_task()
+def update_database():
+
+    print ("Chaining status and onstatus.")
+    ch = chain(status.s() | onstatus.s())
+    ch.apply_async()
+
 
 @shared_task()
 def onstatus(st):
     """
     Handle the status results
     """
-    print("On Status Called..")
+    print("Logging results to the database...")
 
     st = json.loads(st)
 
