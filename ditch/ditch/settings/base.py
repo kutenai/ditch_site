@@ -1,11 +1,13 @@
 from __future__ import absolute_import
 # Django settings for ditch project.
 
+from os.path import abspath
 from unipath import Path
 from celery.schedules import crontab
 from datetime import timedelta
 
-DJANGO_ROOT = Path(__file__).ancestor(3)
+DJANGO_ROOT = Path(abspath(__file__)).ancestor(3)
+print("File:%s" % __file__)
 
 SITE_ROOT = DJANGO_ROOT.ancestor(1)
 print("Site root:%s" % SITE_ROOT)

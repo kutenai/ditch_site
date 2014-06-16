@@ -13,4 +13,4 @@ LESS_POLL = 2000
 try:
     from local_settings import *
 except ImportError:
-    print("Failed to load local_settings.")
+    pass
