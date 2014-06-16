@@ -3,6 +3,7 @@ from __future__ import absolute_import
 
 from unipath import Path
 from celery.schedules import crontab
+from datetime import timedelta
 
 DJANGO_ROOT = Path(__file__).ancestor(3)
 
@@ -229,7 +230,11 @@ CELERYBEAT_SCHEDULE = {
     'update-ditch-db' : {
         'task' : 'dbtasks.tasks.update_database',
         'schedule' : crontab(minute='*/1')
+    },
+    'update_status' : {
+        'task' : 'ditchtasks.tasks.status',
+        'schedule' : timedelta(seconds=2)
     }
 }
 
-DITCH_POLL_RATE = 5000
+DITCH_POLL_RATE = 2000

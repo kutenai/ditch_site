@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 
 import json
+import redis
 
 from celery import shared_task,chain
 from ditchtasks.tasks import status
@@ -12,9 +13,16 @@ logger = get_task_logger('ditch')
 @shared_task()
 def update_database():
 
-    print ("Chaining status and onstatus.")
-    ch = chain(status.s() | onstatus.s())
-    ch.apply_async()
+    r = redis.StrictRedis(host='gardenbuzz.com', port=6379, db=3)
+    try:
+        stat = r.get('ditch_status')
+        onstatus.delay(stat)
+        print("Updated database with latest status.")
+    except:
+        print("exception updating database.")
+
+    #ch = chain(status.s() | onstatus.s())
+    #ch.apply_async()
 
 
 @shared_task()

@@ -47,3 +47,4 @@ class DitchLog(models.Model):
 
 
 
+

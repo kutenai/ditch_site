@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 import json
+import redis
 
 from ditchlib.generic.view import BASEAPIListView,CSRF_Exempt_View
 from ditchlib.util.view import LoginReqMixin
@@ -17,15 +18,20 @@ class StatusView(BASEAPIListView):
     def get(self,request):
 
         print("Query Status..")
-        r = status.delay()
+        #r = status.delay()
 
         self.cal.updateValues()
 
         print("User-Agent:%s" % request.META.get('HTTP_USER_AGENT'),'None')
 
+        r = redis.StrictRedis(host='gardenbuzz.com', port=6379, db=3)
+
         try:
-            stat = r.get(timeout=10)
-            full_status = json.loads(stat) \
+            stat = r.get('ditch_status')
+
+            print("Status:%s" % stat)
+            full_status = json.loads(stat)
+            print("Json string loaded.")
 
             dlvl = full_status.get('Ditch','0.0')
             slvl = full_status.get('Sump','0.0')
@@ -44,7 +50,9 @@ class StatusView(BASEAPIListView):
             }
 
 
-        except:
+        except Exception as e:
+
+            print("Exception reading status:%s" % e)
             ditch_status = {
                 'ditch_inches' : 0.0,
                 'sump_inches'  : 0.0,
