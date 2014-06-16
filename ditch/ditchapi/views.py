@@ -6,10 +6,11 @@ import redis
 from ditchlib.generic.view import BASEAPIListView,CSRF_Exempt_View
 from ditchlib.util.view import LoginReqMixin
 from ditchlib.calibration import DitchCalibration
+from ditchlib.mixins import NeverCacheMixin
 
 from ditchtasks.tasks import status,north_enable,south_enable,pump_enable
 
-class StatusView(BASEAPIListView):
+class StatusView(NeverCacheMixin,BASEAPIListView):
 
     def __init__(self,*args,**kwargs):
         self.cal = DitchCalibration()
