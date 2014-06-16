@@ -1,1 +1,3 @@
 ditch/static/js/gardenbuzz
+celerybeat-schedule
+celerybeat.pid
