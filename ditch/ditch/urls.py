@@ -25,10 +25,11 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r"^account/login/$", LoginView.as_view(), name="account_login"),
-    url(r"^account/logout/?$", logout_user, name="account_logout"),
-    url(r"^account/logged-in/$", LoggedInView.as_view(), name="account_loggedin"),
-    url(r"^account/password/reset/$", PasswordResetView.as_view(), name="account_password_reset"),
-    url(r"^account/password/?$", ChangePasswordView.as_view(), name="account_password"),
+    url(r"^account/", include('account.urls')),
+    #url(r"^accounts/login/$", LoginView.as_view(), name="account_login"),
+    #url(r"^accounts/logout/?$", logout_user, name="account_logout"),
+    #url(r"^accounts/logged-in/$", LoggedInView.as_view(), name="account_loggedin"),
+    #url(r"^accounts/password/reset/$", PasswordResetView.as_view(), name="account_password_reset"),
+    #url(r"^accounts/password/?$", ChangePasswordView.as_view(), name="account_password"),
 )
 

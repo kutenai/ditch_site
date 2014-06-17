@@ -4,8 +4,10 @@ print ("Running Development Settings.")
 
 from .base import *
 
-#DEBUG = True
-#TEMPLATE_DEBUG = DEBUG
+STATIC_ROOT = SITE_ROOT.child('collectedstatic')
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 USE_LESS = True
 LESS_POLL = 2000

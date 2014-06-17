@@ -17,6 +17,8 @@ ADMINS = (
     ('Ed Henderson', 'kutenai@me.com'),
 )
 
+LOGIN_URL = '/account/login/'
+
 MANAGERS = ADMINS
 
 DATABASES = {
@@ -155,12 +157,14 @@ INSTALLED_APPS = (
     'django.contrib.webdesign',
     'django.contrib.comments',
 
-    'pinax_theme_bootstrap',
     'django_forms_bootstrap',
+    'pinax_theme_bootstrap',
+    'bootstrapform',
 
     'rest_framework',
     'account',
     'south',
+    'bootstrap',
 
     'ditch',
     'ditchdb',
