@@ -1,5 +1,5 @@
 
-print ("Running Production Settings.")
+print ("Running Production Local Settings.")
 
 from .base import *
 
@@ -7,7 +7,17 @@ from .base import *
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/var/www/sites/ditch/collectedstatic'
+STATIC_ROOT = '/Users/kutenai/proj/bondiproj/ditch_site/collectedstatic'
+
+#DEBUG = True
+#TEMPLATE_DEBUG = DEBUG
+
+#USE_LESS = True
+#LESS_POLL = 2000
+
+ALLOWED_HOSTS = (
+    '127.0.0.1',
+)
 
 try:
     from local_settings import *

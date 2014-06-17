@@ -75,7 +75,6 @@ MEDIA_URL = '/site_media/media/'
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = ''
 
-
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'

@@ -1,0 +1,1792 @@
+/* *********** */
+/* LESS Styles */
+/*
+    The overall structure is:
+    header Bar - top, width of window
+    frame - contains all other elements, fixed width
+*/
+/* ==========================================================================
+   Color Palettes and Usages
+   ========================================================================== */
+/* ************* */
+/* Color Palette */
+/* Greens */
+/* Blues */
+/* Reds */
+/* Yellows */
+/* Greys */
+/* ********** */
+/* Color Uses */
+/* ********** */
+/* Variations */
+/* ************ */
+/* Brand Assets */
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  *text-indent: -9999px;
+}
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 150%;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.visuallyhidden .focusable:active,
+.visuallyhidden .focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+.invisible {
+  visibility: hidden;
+}
+.clearfix {
+  display: block;
+  zoom: 1;
+}
+.clearfix:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/* ==========================================================================
+   Mixins — These may be combined with colors and helpers in the near future
+   ========================================================================== */
+/*---------------------------------------------------
+    LESS Elements 0.9
+  ---------------------------------------------------
+    A set of useful LESS mixins
+    More info at: http://lesselements.com
+  ---------------------------------------------------*/
+/* ==========================================================================
+   @fontface imports, declarations, and legalese
+   ========================================================================== */
+/* ================= */
+/* Font Declarations */
+/* ================= */
+/*
+* Symbolset
+* www.symbolset.com
+* Copyright © 2012 Oak Studios LLC
+*
+* Upload this file to your web server
+* and place this within your <head> tags.
+* <link href="webfonts/ss-standard.css" rel="stylesheet" />
+*/
+@font-face {
+  font-family: "SSStandard";
+  src: url('/static/fonts/ss-standard.eot');
+  src: url('/static/fonts/ss-standard.eot?#iefix') format('embedded-opentype'), url('/static/fonts/ss-standard.woff') format('woff'), url('/static/fonts/ss-standard.ttf') format('truetype'), url('/static/fonts/ss-standard.svg#SSStandard') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* This triggers a redraw in IE to Fix IE8's :before content rendering. */
+html:hover [class^="ss-"] {
+  -ms-zoom: 1;
+}
+.ss-icon,
+.ss-icon.ss-standard,
+[class^="ss-"]:before,
+[class*=" ss-"]:before,
+[class^="ss-"].ss-standard:before,
+[class*=" ss-"].ss-standard:before,
+[class^="ss-"].right:after,
+[class*=" ss-"].right:after,
+[class^="ss-"].ss-standard.right:after,
+[class*=" ss-"].ss-standard.right:after {
+  font-family: "SSStandard";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  /*-webkit-font-feature-settings: "liga"; Currently broken in Chrome >= v22. Falls back to text-rendering. Safari is unaffected. */
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+[class^="ss-"].right:before,
+[class*=" ss-"].right:before {
+  display: none;
+  content: '';
+}
+.ss-cursor:before,
+.ss-cursor.right:after {
+  content: '';
+}
+.ss-crosshair:before,
+.ss-crosshair.right:after {
+  content: '⌖';
+}
+.ss-search:before,
+.ss-search.right:after {
+  content: '🔎';
+}
+.ss-zoomin:before,
+.ss-zoomin.right:after {
+  content: '';
+}
+.ss-zoomout:before,
+.ss-zoomout.right:after {
+  content: '';
+}
+.ss-view:before,
+.ss-view.right:after {
+  content: '👀';
+}
+.ss-attach:before,
+.ss-attach.right:after {
+  content: '📎';
+}
+.ss-link:before,
+.ss-link.right:after {
+  content: '🔗';
+}
+.ss-move:before,
+.ss-move.right:after {
+  content: '';
+}
+.ss-write:before,
+.ss-write.right:after {
+  content: '✎';
+}
+.ss-writingdisabled:before,
+.ss-writingdisabled.right:after {
+  content: '';
+}
+.ss-erase:before,
+.ss-erase.right:after {
+  content: '✐';
+}
+.ss-compose:before,
+.ss-compose.right:after {
+  content: '📝';
+}
+.ss-lock:before,
+.ss-lock.right:after {
+  content: '🔒';
+}
+.ss-unlock:before,
+.ss-unlock.right:after {
+  content: '🔓';
+}
+.ss-key:before,
+.ss-key.right:after {
+  content: '🔑';
+}
+.ss-backspace:before,
+.ss-backspace.right:after {
+  content: '⌫';
+}
+.ss-ban:before,
+.ss-ban.right:after {
+  content: '🚫';
+}
+.ss-trash:before,
+.ss-trash.right:after {
+  content: '';
+}
+.ss-target:before,
+.ss-target.right:after {
+  content: '◎';
+}
+.ss-tag:before,
+.ss-tag.right:after {
+  content: '';
+}
+.ss-bookmark:before,
+.ss-bookmark.right:after {
+  content: '🔖';
+}
+.ss-flag:before,
+.ss-flag.right:after {
+  content: '⚑';
+}
+.ss-like:before,
+.ss-like.right:after {
+  content: '👍';
+}
+.ss-dislike:before,
+.ss-dislike.right:after {
+  content: '👎';
+}
+.ss-heart:before,
+.ss-heart.right:after {
+  content: '♥';
+}
+.ss-halfheart:before,
+.ss-halfheart.right:after {
+  content: '';
+}
+.ss-star:before,
+.ss-star.right:after {
+  content: '⋆';
+}
+.ss-halfstar:before,
+.ss-halfstar.right:after {
+  content: '';
+}
+.ss-sample:before,
+.ss-sample.right:after {
+  content: '';
+}
+.ss-crop:before,
+.ss-crop.right:after {
+  content: '';
+}
+.ss-layers:before,
+.ss-layers.right:after {
+  content: '';
+}
+.ss-fill:before,
+.ss-fill.right:after {
+  content: '';
+}
+.ss-stroke:before,
+.ss-stroke.right:after {
+  content: '';
+}
+.ss-phone:before,
+.ss-phone.right:after {
+  content: '📞';
+}
+.ss-phonedisabled:before,
+.ss-phonedisabled.right:after {
+  content: '';
+}
+.ss-rss:before,
+.ss-rss.right:after {
+  content: '';
+}
+.ss-facetime:before,
+.ss-facetime.right:after {
+  content: '';
+}
+.ss-reply:before,
+.ss-reply.right:after {
+  content: '↩';
+}
+.ss-send:before,
+.ss-send.right:after {
+  content: '';
+}
+.ss-mail:before,
+.ss-mail.right:after {
+  content: '✉';
+}
+.ss-inbox:before,
+.ss-inbox.right:after {
+  content: '📥';
+}
+.ss-chat:before,
+.ss-chat.right:after {
+  content: '💬';
+}
+.ss-ellipsischat:before,
+.ss-ellipsischat.right:after {
+  content: '';
+}
+.ss-ellipsis:before,
+.ss-ellipsis.right:after {
+  content: '…';
+}
+.ss-user:before,
+.ss-user.right:after {
+  content: '👤';
+}
+.ss-femaleuser:before,
+.ss-femaleuser.right:after {
+  content: '👧';
+}
+.ss-users:before,
+.ss-users.right:after {
+  content: '👥';
+}
+.ss-cart:before,
+.ss-cart.right:after {
+  content: '';
+}
+.ss-creditcard:before,
+.ss-creditcard.right:after {
+  content: '💳';
+}
+.ss-dollarsign:before,
+.ss-dollarsign.right:after {
+  content: '💲';
+}
+.ss-barchart:before,
+.ss-barchart.right:after {
+  content: '📊';
+}
+.ss-piechart:before,
+.ss-piechart.right:after {
+  content: '';
+}
+.ss-box:before,
+.ss-box.right:after {
+  content: '📦';
+}
+.ss-home:before,
+.ss-home.right:after {
+  content: '⌂';
+}
+.ss-buildings:before,
+.ss-buildings.right:after {
+  content: '🏢';
+}
+.ss-warehouse:before,
+.ss-warehouse.right:after {
+  content: '';
+}
+.ss-globe:before,
+.ss-globe.right:after {
+  content: '🌎';
+}
+.ss-navigate:before,
+.ss-navigate.right:after {
+  content: '';
+}
+.ss-compass:before,
+.ss-compass.right:after {
+  content: '';
+}
+.ss-signpost:before,
+.ss-signpost.right:after {
+  content: '';
+}
+.ss-map:before,
+.ss-map.right:after {
+  content: '';
+}
+.ss-location:before,
+.ss-location.right:after {
+  content: '';
+}
+.ss-pin:before,
+.ss-pin.right:after {
+  content: '📍';
+}
+.ss-database:before,
+.ss-database.right:after {
+  content: '';
+}
+.ss-hdd:before,
+.ss-hdd.right:after {
+  content: '';
+}
+.ss-music:before,
+.ss-music.right:after {
+  content: '♫';
+}
+.ss-mic:before,
+.ss-mic.right:after {
+  content: '🎤';
+}
+.ss-volume:before,
+.ss-volume.right:after {
+  content: '🔈';
+}
+.ss-lowvolume:before,
+.ss-lowvolume.right:after {
+  content: '🔉';
+}
+.ss-highvolume:before,
+.ss-highvolume.right:after {
+  content: '🔊';
+}
+.ss-airplay:before,
+.ss-airplay.right:after {
+  content: '';
+}
+.ss-camera:before,
+.ss-camera.right:after {
+  content: '📷';
+}
+.ss-picture:before,
+.ss-picture.right:after {
+  content: '🌄';
+}
+.ss-video:before,
+.ss-video.right:after {
+  content: '📹';
+}
+.ss-play:before,
+.ss-play.right:after {
+  content: '▶';
+}
+.ss-pause:before,
+.ss-pause.right:after {
+  content: '';
+}
+.ss-stop:before,
+.ss-stop.right:after {
+  content: '■';
+}
+.ss-record:before,
+.ss-record.right:after {
+  content: '●';
+}
+.ss-rewind:before,
+.ss-rewind.right:after {
+  content: '⏪';
+}
+.ss-fastforward:before,
+.ss-fastforward.right:after {
+  content: '⏩';
+}
+.ss-skipback:before,
+.ss-skipback.right:after {
+  content: '⏮';
+}
+.ss-skipforward:before,
+.ss-skipforward.right:after {
+  content: '⏭';
+}
+.ss-eject:before,
+.ss-eject.right:after {
+  content: '⏏';
+}
+.ss-repeat:before,
+.ss-repeat.right:after {
+  content: '🔁';
+}
+.ss-replay:before,
+.ss-replay.right:after {
+  content: '↺';
+}
+.ss-shuffle:before,
+.ss-shuffle.right:after {
+  content: '🔀';
+}
+.ss-book:before,
+.ss-book.right:after {
+  content: '📕';
+}
+.ss-openbook:before,
+.ss-openbook.right:after {
+  content: '📖';
+}
+.ss-notebook:before,
+.ss-notebook.right:after {
+  content: '📓';
+}
+.ss-newspaper:before,
+.ss-newspaper.right:after {
+  content: '📰';
+}
+.ss-grid:before,
+.ss-grid.right:after {
+  content: '';
+}
+.ss-rows:before,
+.ss-rows.right:after {
+  content: '';
+}
+.ss-columns:before,
+.ss-columns.right:after {
+  content: '';
+}
+.ss-thumbnails:before,
+.ss-thumbnails.right:after {
+  content: '';
+}
+.ss-filter:before,
+.ss-filter.right:after {
+  content: '';
+}
+.ss-desktop:before,
+.ss-desktop.right:after {
+  content: '💻';
+}
+.ss-laptop:before,
+.ss-laptop.right:after {
+  content: '';
+}
+.ss-tablet:before,
+.ss-tablet.right:after {
+  content: '';
+}
+.ss-cell:before,
+.ss-cell.right:after {
+  content: '📱';
+}
+.ss-battery:before,
+.ss-battery.right:after {
+  content: '🔋';
+}
+.ss-highbattery:before,
+.ss-highbattery.right:after {
+  content: '';
+}
+.ss-mediumbattery:before,
+.ss-mediumbattery.right:after {
+  content: '';
+}
+.ss-lowbattery:before,
+.ss-lowbattery.right:after {
+  content: '';
+}
+.ss-emptybattery:before,
+.ss-emptybattery.right:after {
+  content: '';
+}
+.ss-lightbulb:before,
+.ss-lightbulb.right:after {
+  content: '💡';
+}
+.ss-downloadcloud:before,
+.ss-downloadcloud.right:after {
+  content: '';
+}
+.ss-download:before,
+.ss-download.right:after {
+  content: '';
+}
+.ss-uploadcloud:before,
+.ss-uploadcloud.right:after {
+  content: '';
+}
+.ss-upload:before,
+.ss-upload.right:after {
+  content: '';
+}
+.ss-fork:before,
+.ss-fork.right:after {
+  content: '';
+}
+.ss-merge:before,
+.ss-merge.right:after {
+  content: '';
+}
+.ss-transfer:before,
+.ss-transfer.right:after {
+  content: '⇆';
+}
+.ss-refresh:before,
+.ss-refresh.right:after {
+  content: '↻';
+}
+.ss-sync:before,
+.ss-sync.right:after {
+  content: '';
+}
+.ss-loading:before,
+.ss-loading.right:after {
+  content: '';
+}
+.ss-wifi:before,
+.ss-wifi.right:after {
+  content: '';
+}
+.ss-connection:before,
+.ss-connection.right:after {
+  content: '';
+}
+.ss-file:before,
+.ss-file.right:after {
+  content: '📄';
+}
+.ss-folder:before,
+.ss-folder.right:after {
+  content: '📁';
+}
+.ss-quote:before,
+.ss-quote.right:after {
+  content: '“';
+}
+.ss-text:before,
+.ss-text.right:after {
+  content: '';
+}
+.ss-font:before,
+.ss-font.right:after {
+  content: '';
+}
+.ss-print:before,
+.ss-print.right:after {
+  content: '⎙';
+}
+.ss-fax:before,
+.ss-fax.right:after {
+  content: '📠';
+}
+.ss-list:before,
+.ss-list.right:after {
+  content: '';
+}
+.ss-layout:before,
+.ss-layout.right:after {
+  content: '';
+}
+.ss-action:before,
+.ss-action.right:after {
+  content: '';
+}
+.ss-redirect:before,
+.ss-redirect.right:after {
+  content: '↪';
+}
+.ss-expand:before,
+.ss-expand.right:after {
+  content: '⤢';
+}
+.ss-contract:before,
+.ss-contract.right:after {
+  content: '';
+}
+.ss-help:before,
+.ss-help.right:after {
+  content: '❓';
+}
+.ss-info:before,
+.ss-info.right:after {
+  content: 'ℹ';
+}
+.ss-alert:before,
+.ss-alert.right:after {
+  content: '⚠';
+}
+.ss-caution:before,
+.ss-caution.right:after {
+  content: '⛔';
+}
+.ss-logout:before,
+.ss-logout.right:after {
+  content: '';
+}
+.ss-plus:before,
+.ss-plus.right:after {
+  content: '+';
+}
+.ss-hyphen:before,
+.ss-hyphen.right:after {
+  content: '-';
+}
+.ss-check:before,
+.ss-check.right:after {
+  content: '✓';
+}
+.ss-delete:before,
+.ss-delete.right:after {
+  content: '␡';
+}
+.ss-settings:before,
+.ss-settings.right:after {
+  content: '⚙';
+}
+.ss-dashboard:before,
+.ss-dashboard.right:after {
+  content: '';
+}
+.ss-notifications:before,
+.ss-notifications.right:after {
+  content: '🔔';
+}
+.ss-notificationsdisabled:before,
+.ss-notificationsdisabled.right:after {
+  content: '🔕';
+}
+.ss-clock:before,
+.ss-clock.right:after {
+  content: '⏲';
+}
+.ss-stopwatch:before,
+.ss-stopwatch.right:after {
+  content: '⏱';
+}
+.ss-calendar:before,
+.ss-calendar.right:after {
+  content: '📅';
+}
+.ss-addcalendar:before,
+.ss-addcalendar.right:after {
+  content: '';
+}
+.ss-removecalendar:before,
+.ss-removecalendar.right:after {
+  content: '';
+}
+.ss-checkcalendar:before,
+.ss-checkcalendar.right:after {
+  content: '';
+}
+.ss-deletecalendar:before,
+.ss-deletecalendar.right:after {
+  content: '';
+}
+.ss-briefcase:before,
+.ss-briefcase.right:after {
+  content: '💼';
+}
+.ss-cloud:before,
+.ss-cloud.right:after {
+  content: '☁';
+}
+.ss-droplet:before,
+.ss-droplet.right:after {
+  content: '💧';
+}
+.ss-flask:before,
+.ss-flask.right:after {
+  content: '';
+}
+.ss-up:before,
+.ss-up.right:after {
+  content: '⬆';
+}
+.ss-upright:before,
+.ss-upright.right:after {
+  content: '⬈';
+}
+.ss-right:before,
+.ss-right.right:after {
+  content: '➡';
+}
+.ss-downright:before,
+.ss-downright.right:after {
+  content: '⬊';
+}
+.ss-down:before,
+.ss-down.right:after {
+  content: '⬇';
+}
+.ss-downleft:before,
+.ss-downleft.right:after {
+  content: '⬋';
+}
+.ss-left:before,
+.ss-left.right:after {
+  content: '⬅';
+}
+.ss-upleft:before,
+.ss-upleft.right:after {
+  content: '⬉';
+}
+.ss-navigateup:before,
+.ss-navigateup.right:after {
+  content: '';
+}
+.ss-navigateright:before,
+.ss-navigateright.right:after {
+  content: '▻';
+}
+.ss-navigatedown:before,
+.ss-navigatedown.right:after {
+  content: '';
+}
+.ss-navigateleft:before,
+.ss-navigateleft.right:after {
+  content: '◅';
+}
+.ss-directup:before,
+.ss-directup.right:after {
+  content: '▴';
+}
+.ss-directright:before,
+.ss-directright.right:after {
+  content: '▹';
+}
+.ss-dropdown:before,
+.ss-dropdown.right:after {
+  content: '▾';
+}
+.ss-directleft:before,
+.ss-directleft.right:after {
+  content: '◃';
+}
+.ss-retweet:before,
+.ss-retweet.right:after {
+  content: '';
+}
+/* Legacy classes */
+.ss-volumelow:before,
+.ss-volumelow.right:after {
+  content: '🔉';
+}
+.ss-volumehigh:before,
+.ss-volumehigh.right:after {
+  content: '🔊';
+}
+.ss-batteryhigh:before,
+.ss-batteryhigh.right:after {
+  content: '';
+}
+.ss-batterymedium:before,
+.ss-batterymedium.right:after {
+  content: '';
+}
+.ss-batterylow:before,
+.ss-batterylow.right:after {
+  content: '';
+}
+.ss-batteryempty:before,
+.ss-batteryempty.right:after {
+  content: '';
+}
+.ss-clouddownload:before,
+.ss-clouddownload.right:after {
+  content: '';
+}
+.ss-cloudupload:before,
+.ss-cloudupload.right:after {
+  content: '';
+}
+.ss-calendaradd:before,
+.ss-calendaradd.right:after {
+  content: '';
+}
+.ss-calendarremove:before,
+.ss-calendarremove.right:after {
+  content: '';
+}
+.ss-calendarcheck:before,
+.ss-calendarcheck.right:after {
+  content: '';
+}
+.ss-calendardelete:before,
+.ss-calendardelete.right:after {
+  content: '';
+}
+/* ==========================================================================
+   Typographic styles and applications
+
+   NOTE: See fonts.less for @font-face imports;
+
+   ========================================================================== */
+.font-reset {
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+}
+/* Base Font Styles */
+.base-serif {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+}
+.base-header {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: #fafaf7;
+  font-weight: 700;
+}
+.base-paragraph {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: 'darkblue';
+}
+/* ================= */
+/* Font Applications */
+/* ================= */
+/* Base Header Styles */
+h1 {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: #fafaf7;
+  font-weight: 700;
+  font-size: 2em;
+  line-height: 1.4em;
+  padding-top: .9em;
+  padding-bottom: .1em;
+}
+h2 {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: #fafaf7;
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1.3em;
+  padding-top: .9em;
+  padding-bottom: .3em;
+}
+h3 {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: #fafaf7;
+  font-weight: 700;
+  font-size: 1.175em;
+  line-height: 1.7em;
+  padding-top: 1.2em;
+  padding-bottom: .3em;
+}
+h4 {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: #fafaf7;
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 1.9em;
+  padding-top: 1.5em;
+  padding-bottom: .3em;
+}
+p {
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: 300;
+  font-style: normal;
+  letter-spacing: .05em;
+  color: 'darkblue';
+  line-height: 1.43em;
+}
+p .wide-lines {
+  line-height: 1.9em;
+}
+/* ==========================================================================
+    Base styles
+   ========================================================================== */
+html,
+button,
+input,
+select,
+textarea {
+  color: #ffffff;
+}
+button {
+  color: blue;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: #29b9cc;
+  color: #fafaf7;
+}
+body.image-background {
+  background-image: url('/static/img/Gardenbuzz-Dark-Background.jpg');
+  background-size: cover;
+}
+body.image-background p {
+  color: #000000;
+}
+body,
+.pure-g [class*="pure-u"],
+.pure-g-r [class*="pure-u"] {
+  font-size: 1em;
+  line-height: 1.4;
+  font-family: 'BenchNine', 'Roboto Slab', helvetica, arial, sans-serif;
+  margin: 0;
+}
+.pure-g > div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+::selection {
+  background: #d4ffc3;
+}
+::-moz-selection {
+  background: #d4ffc3;
+}
+.chromeframe {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+.small-text {
+  font-size: .75em;
+}
+.large-text {
+  font-size: 1.5em;
+}
+.ss-icon {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: #29b9cc;
+}
+a:hover {
+  color: #1c8096;
+  cursor: pointer;
+}
+a:active {
+  color: #acd7e5;
+}
+a:focus {
+  outline: none;
+}
+iframe {
+  border: none;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  color: #ffe8dd;
+  line-height: 1.5em;
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: #ffe8dd;
+  margin: 0 1em;
+}
+.dark-background {
+  background-color: #555550;
+  color: #fafaf7;
+}
+.dark-background .light-text {
+  color: #e1e1dc;
+}
+.light-background {
+  background-color: #fafaf7;
+  color: #afafaa;
+}
+.accent-background {
+  background-color: #29b9cc;
+  color: #fafaf7;
+}
+/* ==========================================================================
+   Layout Styles and Composition
+   ========================================================================== */
+.body_wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+}
+#banner {
+  height: 21em;
+  padding: 3em 2em;
+  background: #555550 url('/static/img/gardenbuzz_logo_veggies.png') no-repeat right center;
+  overflow: hidden;
+  text-align: center;
+}
+#banner h1,
+#banner h2,
+#banner h3,
+#banner h4,
+#banner h5,
+#banner h6,
+#banner p {
+  color: #fafaf7;
+  line-height: 1.5em;
+  margin-top: 0;
+  padding-top: 0;
+  text-align: left;
+}
+#banner a {
+  font-style: italic;
+}
+#banner #login_or {
+  padding: .5em 0;
+  text-align: center;
+  position: relative;
+  color: #e1e1dc;
+}
+#banner #login_or span:before,
+#banner #login_or span:after {
+  content: ' ';
+  display: block;
+  width: 80px;
+  margin: 0 10px;
+  height: 1px;
+  background: #afafaa;
+  position: absolute;
+  top: 1.1em;
+  opacity: 0.75;
+}
+#banner #login_or span:before {
+  left: 0;
+}
+#banner #login_or span:after {
+  right: 0;
+}
+#banner #banner_headline {
+  font-size: 1.5em;
+  line-height: 1.15em;
+  margin-bottom: .25em;
+}
+#search_header {
+  background: #fafaf7;
+  width: 100%;
+}
+#page_header {
+  height: 385px;
+}
+#top_tabs {
+  padding: 0em 1em 1em 1em !important;
+  overflow: auto;
+  color: #555550;
+}
+#top_tabs #top_tabs_labels {
+  list-style-type: none;
+  font-weight: 300;
+  padding: 0;
+  overflow: auto;
+  border-bottom: 1px solid #e1e1dc;
+}
+#top_tabs #top_tabs_labels a {
+  color: #555550;
+  padding-right: 2em;
+}
+#top_tabs #top_tabs_labels a:hover {
+  color: #555550;
+}
+#top_tabs #top_tabs_labels a:active {
+  color: #afafaa;
+}
+#top_tabs #top_tabs_labels .ui-state-active {
+  font-weight: 600;
+}
+#top_tabs #top_tabs_labels li {
+  float: left;
+}
+#top_tabs div {
+  padding: 0;
+}
+#top_tabs p {
+  color: #555550;
+  font-weight: 300 !important;
+}
+#top_tabs label + input {
+  margin-top: 0em;
+}
+#bottom {
+  background-color: #fafaf7;
+  color: #afafaa;
+  min-height: 400px;
+  padding: 2em;
+}
+#bottom #main_left {
+  margin-left: -1em;
+  padding-right: 1em;
+}
+#bottom #main_right {
+  background-color: #e1e1dc;
+  height: intrinsic;
+}
+#bottom #main_right a {
+  color: #555550;
+}
+#bottom #main_right a:hover {
+  color: #afafaa;
+}
+#bottom #main_right a.selected {
+  color: #555550;
+  font-weight: 700;
+}
+#bottom #main_right a:active {
+  color: #555550;
+}
+#bottom #main_right div {
+  padding: 1em;
+}
+#bottom #main_right hr {
+  background-color: #afafaa;
+}
+#bottom #main_right hr + .card-title,
+#bottom #main_right ul + .card-title {
+  margin-top: 1em;
+}
+.pure-button .ss-icon {
+  position: relative;
+  top: .125em;
+  margin-right: .2em;
+}
+#login_page,
+#signup_page {
+  padding: 6em 2em 0;
+  text-align: center;
+}
+#login_page .login-form-wrapper,
+#signup_page .login-form-wrapper {
+  width: 60%;
+  margin: 1em auto 2.5em;
+  text-align: left;
+}
+#login_page input,
+#signup_page input {
+  color: #555550;
+}
+#login_page .login_page_form,
+#signup_page .login_page_form,
+#login_page .signup_page_form,
+#signup_page .signup_page_form {
+  margin: 0 auto;
+}
+#login_page h2,
+#signup_page h2,
+#login_page h3,
+#signup_page h3 {
+  color: #e1e1dc;
+}
+#login_page #login_or,
+#signup_page #login_or {
+  position: relative;
+  padding-top: 3.75em;
+  font-weight: 100;
+  text-align: center;
+}
+#login_page #login_or span,
+#signup_page #login_or span {
+  font-size: .75em;
+}
+#login_page #login_or:before,
+#signup_page #login_or:before,
+#login_page #login_or:after,
+#signup_page #login_or:after {
+  height: 3em;
+  top: .5em;
+  content: "";
+  display: block;
+  border-left: 1px solid #afafaa;
+  position: absolute;
+  left: 50%;
+}
+#login_page #login_or:after,
+#signup_page #login_or:after {
+  top: 5.25em;
+}
+#signup_page #login_or,
+#login_page #login_or {
+  margin-top: 1.5em;
+  padding-top: 6em;
+}
+#signup_page #login_or:before,
+#login_page #login_or:before,
+#signup_page #login_or:after,
+#login_page #login_or:after {
+  padding-top: 2em;
+}
+#signup_page #login_or:after,
+#login_page #login_or:after {
+  top: 8em;
+}
+#signup_page #reset_page,
+#login_page #reset_page {
+  margin-bottom: 2em;
+}
+#signup_page #reset_form,
+#login_page #reset_form {
+  text-align: left;
+}
+#signup_page #reset_form p,
+#login_page #reset_form p {
+  color: #afafaa;
+}
+#signup_page #reset_form input,
+#login_page #reset_form input {
+  margin-bottom: 0;
+}
+#signup_page #reset_form button,
+#login_page #reset_form button {
+  width: 100%;
+}
+.social-connect-wrapper {
+  margin: 5em auto 0;
+  padding: 0 2em;
+  text-align: center;
+}
+.social-connect-wrapper h2 {
+  color: #e1e1dc;
+  font-size: 1.5em !important;
+}
+.social-connect-wrapper #social_connect_buttons {
+  margin: 0 auto;
+}
+#profile_header {
+  background: #fafaf7;
+  padding: 0 1em 1em !important;
+  overflow: auto;
+}
+#profile_header #profile_header_banner {
+  margin-top: 0 !important;
+}
+#profile_header.personal-profile #profile_info {
+  position: relative;
+  padding-top: .75em;
+  color: #555550;
+  font-weight: 700;
+  float: left;
+  z-index: 10;
+}
+#profile_header.personal-profile #profile_info #profile_info_details p {
+  color: #afafaa;
+}
+#profile_header.personal-profile button,
+#profile_header.personal-profile a {
+  display: inline;
+  margin-top: .75em;
+  clear: both;
+}
+#profile_header.personal-profile button .ss-icon,
+#profile_header.personal-profile a .ss-icon {
+  position: relative;
+  top: .1em;
+  left: -0.2em;
+}
+#profile_header.personal-profile {
+  padding: 1em 0 !important;
+}
+#profile_header.personal-profile #gravatar_img {
+  float: left;
+  margin-right: 1em;
+}
+#profile_header.personal-profile #gravatar_img a img {
+  -webkit-border-top-right-radius: 50px;
+  -webkit-border-bottom-right-radius: 50px;
+  -webkit-border-bottom-left-radius: 50px;
+  -webkit-border-top-left-radius: 50px;
+  -moz-border-radius-topright: 50px;
+  -moz-border-radius-bottomright: 50px;
+  -moz-border-radius-bottomleft: 50px;
+  -moz-border-radius-topleft: 50px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#profile_header.personal-profile #gravatar_img a button {
+  position: absolute;
+  font-size: .6em;
+  padding: .5em;
+}
+#profile_header #profile_info {
+  margin-right: 1em;
+  margin-top: 1em !important;
+}
+#profile_header #profile_buttons a button {
+  position: relative;
+  z-index: 10;
+}
+#profile,
+#profile_left {
+  padding: 0 !important;
+}
+#search_bar {
+  font-size: .75em;
+  width: 25%;
+  margin-right: 5%;
+}
+#search_bar hr {
+  margin: 1em 0;
+}
+#search_bar h2,
+#search_bar h3 {
+  margin: 0;
+  padding: 0;
+}
+#search_bar ul {
+  list-style-type: none;
+  padding: 0;
+}
+#search_bar ul .search-category:after {
+  content: ' ▻';
+  font-family: "SSStandard";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  /*-webkit-font-feature-settings: "liga"; Currently broken in Chrome >= v22. Falls back to text-rendering. Safari is unaffected. */
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  font-size: .75em;
+}
+#search_bar ul .search-category.selected:after {
+  content: ' ';
+}
+#search_bar ul .category-list {
+  margin-bottom: 1em;
+}
+#search_bar ul .category-list a {
+  color: #afafaa;
+}
+#search_bar ul .category-list a:hover {
+  color: #555550;
+}
+#search_results {
+  padding: 0 1em;
+}
+#footer {
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  font-size: .7em;
+  background-color: #555550;
+  color: #fafaf7;
+  background: #555550 url('/static/img/Gardenbuzz-Footer-Backround.png') no-repeat center top;
+  overflow: hidden;
+  padding: 2em;
+}
+#footer a {
+  color: #afafaa;
+  line-height: 2em;
+}
+#footer a:hover {
+  color: #e1e1dc;
+}
+#footer a:active {
+  color: #afafaa;
+}
+#footer a:visited {
+  color: #fafaf7;
+}
+#footer h2 {
+  color: #e1e1dc;
+}
+#footer p {
+  color: #afafaa;
+}
+#footer .light-text {
+  color: #e1e1dc;
+}
+#footer #footer_logo {
+  background: url('/static/img/gardenbuzz_logo_footer_pot_bee.png') no-repeat center center;
+  min-height: 143px;
+  margin-bottom: 2em;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#footer #footer_wrapper h3,
+#footer #footer_wrapper p {
+  padding-right: 3em;
+}
+#footer #footer_copyright {
+  font-size: .75em;
+}
+#privacy_policy p + p,
+#terms_of_service p + p {
+  margin-top: 1em;
+}
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media only screen and (min-width: 400px) {
+  .project-preview {
+    width: 47%;
+  }
+}
+@media only screen and (min-width: 530px) {
+  .project-preview {
+    width: 30%;
+    height: 20em;
+  }
+  .project-preview .pure-button {
+    display: block;
+  }
+}
+@media only screen and (min-width: 768px) {
+  #banner {
+    background-position: center center;
+  }
+  #footer #footer_logo {
+    background-position: left center;
+    background-size: 90%;
+  }
+}
+@media only screen and (min-width: 960px) {
+  #header {
+    padding: 1em;
+  }
+  #header #header_logo {
+    width: 16.2em;
+    display: none;
+  }
+  #header nav {
+    position: relative;
+    display: block;
+    /* Dropdown un-styling */
+    background: transparent;
+    top: inherit;
+    width: inherit;
+    -webkit-box-shadow: none 1px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: none 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: none 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  #header nav .nav-list li {
+    display: inline;
+  }
+  #header nav .nav-list li a {
+    /* Dropdown un-styling */
+    display: inline;
+    padding: 0;
+    border: none;
+  }
+  #header nav:before {
+    display: none;
+  }
+  #header nav #site_nav {
+    float: left;
+  }
+  #header nav #account_nav {
+    float: right;
+  }
+  #header nav #account_nav a {
+    padding-right: 1.5em;
+  }
+  #header #search_box {
+    width: intrinsic;
+    float: right;
+  }
+  #header #header_nav_button {
+    display: none;
+  }
+  #header,
+  #banner_wrapper,
+  #profile_header_banner,
+  #main,
+  #footer_wrapper,
+  #login_page,
+  #signup_page,
+  #search_term,
+  .alert {
+    width: 940px;
+    margin: 0 auto;
+  }
+  #banner #banner_headline {
+    font-size: 2em;
+  }
+  #footer #footer_logo {
+    background-size: inherit;
+  }
+}
+.wrapper {
+  margin: 0 auto;
+  bottom: 0;
+}
+#header_bar {
+  padding: .25em 1em;
+  height: 127px;
+  z-index: 100;
+  background-color: #ffffff;
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+#header_bar #header_logo {
+  position: absolute;
+  left: 127px;
+  top: 16px;
+  z-index: 20;
+}
+#header_bar #header_title {
+  position: absolute;
+  left: 172px;
+  top: 34px;
+}
+#header_bar nav {
+  /* Dropdown Styling */
+  position: absolute;
+  bottom: 32px;
+  right: 50px;
+}
+#header_bar nav:before {
+  content: "directup";
+  display: block;
+  position: absolute;
+  top: -0.85em;
+  right: 1.75em;
+  color: #afafaa;
+  font-family: "SSStandard";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  /*-webkit-font-feature-settings: "liga"; Currently broken in Chrome >= v22. Falls back to text-rendering. Safari is unaffected. */
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+}
+#header_bar nav a {
+  padding: 1em 0.7em;
+}
+#header_bar nav .nav-list {
+  list-style-type: none;
+  margin: .05em 0;
+  padding: 0;
+}
+#header_bar nav .nav-list li a {
+  color: #fafaf7;
+  text-decoration: none;
+  font-size: .8em;
+  /* Dropdown Styling */
+  display: block;
+  padding: 1em 1em;
+  border-top: 1px solid #afafaa;
+}
+#header_bar nav .nav-list li a:hover {
+  text-decoration: underline;
+}
+#header_bar #header_nav_toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  visibility: hidden;
+}
+#header_bar #header_nav_toggle:checked + nav {
+  display: block;
+}
+#header_bar #header_nav_button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+#header_bar #search_box {
+  width: 55%;
+  padding: .5em 0;
+  margin: 0 auto;
+}
+/* ==========================================================================
+   Layout Styles and Composition
+   ========================================================================== */
+/* ==========================================================================
+   Modules reused throughout the site
+   ========================================================================== */
+.alert {
+  background: transparent;
+}
+.ss-icon-clickable {
+  cursor: pointer;
+}
+.pagination {
+  padding: 0 0 1em 0 !important;
+  color: #afafaa;
+}
+.errorlist {
+  list-style-type: none;
+  padding: .5em;
+  border: 1px solid #fc7856;
+  color: #fc7856;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+  font-size: .75em;
+}
+.errorlist:before {
+  content: "Warning";
+  font-family: "SSStandard";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  /*-webkit-font-feature-settings: "liga"; Currently broken in Chrome >= v22. Falls back to text-rendering. Safari is unaffected. */
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer;
+  float: left;
+  display: block;
+  margin-right: .5em;
+}
+.nav-link-style {
+  color: #fafaf7;
+  text-decoration: none;
+  font-size: .8em;
+}
+.nav-link-style:hover {
+  text-decoration: underline;
+}
