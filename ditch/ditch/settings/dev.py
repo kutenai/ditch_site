@@ -4,11 +4,15 @@ print ("Running Development Settings.")
 
 from .base import *
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+#DEBUG = True
+#TEMPLATE_DEBUG = DEBUG
 
 USE_LESS = True
 LESS_POLL = 2000
+
+ALLOWED_HOSTS = (
+    '127.0.0.1',
+)
 
 try:
     from local_settings import *
