@@ -114,6 +114,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
+    'ws4redis.context_processors.default',
     'django.core.context_processors.tz',
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
@@ -174,6 +175,9 @@ INSTALLED_APPS = (
     'dbtasks',
     'ditchtasks',
 
+    # Web sockets
+    'ws4redis',
+
     #'messages',
 )
 
@@ -213,6 +217,35 @@ LOGGING = {
 
 USE_LESS = False
 LESS_POLL = 20000
+
+# Web Sockets
+WEBSOCKET_URL = '/ws/'
+
+WS4REDIS_CONNECTION = {
+    'host': 'gardenbuzz.com',
+    'port': 6379,
+    'db': 4, # For production
+    #'password': 'verysecret',
+}
+WS4REDIS_EXPIRE = 7200
+
+# Use a different prefix for dev
+WS4REDIS_PREFIX = 'ws'
+#WS4REDIS_SUBSCRIBER = 'myapp.redis_store.RedisSubscriber'
+WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
+# Redis Sessions
+SESSION_ENGINE = 'redis_sessions.session'
+
+SESSION_REDIS_HOST = 'gardenbuzz.com'
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_DB = 5
+#SESSION_REDIS_PASSWORD = 'password'
+SESSION_REDIS_PREFIX = 'ditch'
+
+# If you prefer domain socket connection, you can just add this line instead of SESSION_REDIS_HOST and SESSION_REDIS_PORT.
+
+#SESSION_REDIS_UNIX_DOMAIN_SOCKET_PATH = '/var/run/redis/redis.sock'
 
 # Celery
 BROKER_URL = 'redis://gardenbuzz.com:6379/0'
