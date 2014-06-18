@@ -1,0 +1,24 @@
+#!/bin/bash
+
+base=/var/www/sites/ditch
+envname=ditchdj
+
+pushd $base
+
+source $WORKON_HOME/$envname/bin/activate
+
+pushd currentVersion
+git pull
+popd
+
+pip install -r currentVersion/requirements.txt
+
+mkdir -p collectedstatic
+./manage collectstatic --noinput
+
+
+# Touch this file to cause uwsgi to reload the app.
+touch reload.me
+
+popd
+
