@@ -21,7 +21,6 @@ class DitchCalibration(object):
         try:
             e = DitchCal.objects.all()
             if e.count() > 0:
-                print("Setting calibration from DB")
                 cal = e[0]
                 self.d_offset = cal.ditch_slope
                 self.d_scale = cal.ditch_scale
@@ -31,9 +30,6 @@ class DitchCalibration(object):
 
         except:
             print("Failed to update calibration.")
-
-
-
 
     def ditch_inches(self,ditch_val):
         """

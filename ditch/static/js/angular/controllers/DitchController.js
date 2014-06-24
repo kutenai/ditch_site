@@ -20,19 +20,27 @@ app.controller('DitchController',
                 ditch_reading: 0.0,
                 sump_reading: 0.0
             };
-            $scope.northButton = "North On";
-            $scope.southButton = "South On";
-            $scope.pumpButton = "Pump On";
+
+            $scope.states = {
+                'north' : { label: 'North On', call: false },
+                'south' : { label: 'South On', call: false },
+                'pump'  : { label: 'Pump On', call: false }
+            };
 
             function onStatus(status) {
                 $scope.info = status;
 
-                if (status.north_call) {
-                    $scope.northButton = "North Off";
-                } else {
-                    $scope.northButton = "North On";
-                }
-            };
+                _.each(['north','south','pump'], function(zone) {
+                    var call = status[zone+"_call"];
+                    var zoneName = zone.charAt(0).toUpperCase() + zone.slice(1);
+                    console.log("Zone Name:" + zoneName);
+
+                    $scope.states[zone].call = call;
+                    $scope.states[zone].label = zoneName + (call ? " Off" : " On");
+                    console.log('Status for ' + zone + " " + call);
+                });
+
+            }
 
             $http.get('/api/v1/status/').success(function (data) {
                 onStatus(data);
@@ -44,29 +52,16 @@ app.controller('DitchController',
                 });
             }, DitchParams.statusPollRate);
 
-            $scope.northToggle = function () {
-                if ($scope.info.north_call) {
-                    $http.post('/api/v1/north/off/').success(function () {});
-                } else {
-                    $http.post('/api/v1/north/on/').success(function () {});
-                }
-            };
+            console.log("Polling every " + DitchParams.statusPollRate + " milliseconds.");
 
-            $scope.southToggle = function () {
-                if ($scope.info.south_call) {
-                    $http.post('/api/v1/south/off/').success(function () {});
+            $scope.toggleState = function(zone) {
+                if ($scope.states[zone].call) {
+                    $http.post('/api/v1/' + zone + '/off/').success(function () {});
                 } else {
-                    $http.post('/api/v1/south/on/').success(function () {});
+                    $http.post('/api/v1/' + zone + '/on/').success(function () {});
                 }
-            };
+            }
 
-            $scope.pumpToggle = function () {
-                if ($scope.info.pump_call) {
-                    $http.post('/api/v1/pump/off/').success(function () {});
-                } else {
-                    $http.post('/api/v1/pump/on/').success(function () {});
-                }
-            };
         }
     ]
 );

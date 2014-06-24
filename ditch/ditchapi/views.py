@@ -18,21 +18,12 @@ class StatusView(NeverCacheMixin,BASEAPIListView):
 
     def get(self,request):
 
-        print("Query Status..")
-        #r = status.delay()
-
-        self.cal.updateValues()
-
-        print("User-Agent:%s" % request.META.get('HTTP_USER_AGENT'),'None')
-
         r = redis.StrictRedis(host='gardenbuzz.com', port=6379, db=3)
 
         try:
             stat = r.get('ditch_status')
 
-            print("Status:%s" % stat)
             full_status = json.loads(stat)
-            print("Json string loaded.")
 
             dlvl = full_status.get('Ditch','0.0')
             slvl = full_status.get('Sump','0.0')
