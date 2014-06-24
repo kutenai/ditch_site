@@ -97,6 +97,11 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+# Set your DSN value
+RAVEN_CONFIG = {
+    'dsn': 'https://2ebc4238aa3d493ba1621ad15097a158:6e84b01224fa441fb7eee42620e6b2c2@app.getsentry.com/26472',
+    }
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = ')#w(pmjx(&+1q&yfz&d=)@2ut1q^gkkq^rco77o!_9#b&7!2uz'
 
@@ -179,6 +184,7 @@ INSTALLED_APPS = (
     'ws4redis',
 
     #'messages',
+    'raven.contrib.django.raven_compat',
 )
 
 REST_FRAMEWORK = {
