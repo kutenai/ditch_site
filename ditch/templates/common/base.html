@@ -1,9 +1,14 @@
 {% load staticfiles %}
 {% load url from future %}
 {% load i18n %}
+
 <!DOCTYPE HTML>
 
+{%  if angularapp %}
 <html lang="{{ LANGUAGE_CODE }}" ng-app="{{ angularapp }}" class="main">
+{% else %}
+<html lang="{{ LANGUAGE_CODE }}" class="main">
+{% endif %}
 <head>
     <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} | {% endif %}{% block head_title %}
     {% endblock %}{% endblock %}</title>
@@ -77,6 +82,14 @@
 
     {% block body_script %}
         <!-- base.html: body_script -->
+        <script src="{% static 'js/library/jquery-1.10.2.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/library/jquery-ui-1.10.3.custom.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/library/underscore.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/library/jquery.download.js' %}" type="text/javascript"></script>
+        <script src="{% static 'js/library/json2.js' %}" type="text/javascript"></script>
+
+        <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
     {% endblock %}
 
     {% block extra_script %}

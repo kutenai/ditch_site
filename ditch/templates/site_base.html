@@ -7,7 +7,12 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700|Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+
+    {% block typekit %}
+        <script type="text/javascript" src="//use.typekit.net/dre8afp.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    {% endblock %}
 
     {% if use_less %}
         <link rel="stylesheet/less" type="text/css" href="{% static 'less/style_base.less' %}">
@@ -43,12 +48,8 @@
     {% trans "Boise Ditch Company" %}
 {% endblock %}
 
-{% block wrapper_class %}wrapper{% endblock %}
-
 {% block header_bar_base %}
-    {% comment %}
     {% include "common/header.html" %}
-    {% endcomment %}
 {% endblock header_bar_base %}
 
 {% block footer_base %}
@@ -59,14 +60,6 @@
 
 {% block extra_script %}
     <!-- site_base.html: extra_script -->
-
-    <script src="{% static 'js/library/jquery-1.10.2.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/library/jquery-ui-1.10.3.custom.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/library/underscore.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/library/jquery.download.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/library/json2.js' %}" type="text/javascript"></script>
-
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
 
     {% if use_less %}
     {% endif %}
