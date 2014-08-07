@@ -277,7 +277,7 @@ CELERYBEAT_SCHEDULE = {
     },
     'update_status' : {
         'task' : 'ditchtasks.tasks.status',
-        'schedule' : timedelta(seconds=2)
+        'schedule' : timedelta(seconds=10)
     }
 }
 
