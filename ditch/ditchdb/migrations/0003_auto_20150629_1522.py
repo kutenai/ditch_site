@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='ditchlog',
             name='ditch_inches',
-            field=models.FloatField(default=datetime.datetime(2015, 6, 29, 21, 22, 5, 690419, tzinfo=utc)),
+            field=models.FloatField(default=0.0),
             preserve_default=False,
         ),
         migrations.AddField(
