@@ -3,3 +3,5 @@ celerybeat-schedule
 celerybeat.pid
 freeze.txt
 reload.me
+env.txt
+ditch/local_config.py

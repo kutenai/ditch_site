@@ -280,3 +280,8 @@ CELERYBEAT_SCHEDULE = {
 }
 
 DITCH_POLL_RATE = 2000
+
+COMPRESS_PRECOMPILERS = (
+    ('text/less', 'lessc --clean-css --clean-option=--keep-line-breaks {infile} {outfile}'),
+)
+

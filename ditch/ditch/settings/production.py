@@ -9,7 +9,3 @@ from .base import *
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = '/var/www/sites/ditch/collectedstatic'
 
-try:
-    from local_settings import *
-except ImportError:
-    print("Failed to load local_settings.")

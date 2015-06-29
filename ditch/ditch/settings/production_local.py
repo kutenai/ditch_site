@@ -19,7 +19,3 @@ ALLOWED_HOSTS = (
     '127.0.0.1',
 )
 
-try:
-    from local_settings import *
-except ImportError:
-    print("Failed to load local_settings.")
