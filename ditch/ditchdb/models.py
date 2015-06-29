@@ -20,18 +20,18 @@ class DitchCal(models.Model):
 @python_2_unicode_compatible
 class DitchLog(models.Model):
     timestamp       = models.DateTimeField(auto_now=True)
-    ditchlvl        = models.IntegerField()
-    sumplvl         = models.IntegerField()
-    ditch_inches    = models.FloatField()
-    sump_inches    = models.FloatField()
-    pump_call       = models.BooleanField()
-    pump_on         = models.BooleanField()
+    ditchlvl        = models.IntegerField(default=0)
+    sumplvl         = models.IntegerField(default=0)
+    ditch_inches    = models.FloatField(default=0.0)
+    sump_inches    = models.FloatField(default=0.0)
+    pump_call       = models.BooleanField(default=0)
+    pump_on         = models.BooleanField(default=0)
 
-    north_call      = models.BooleanField()
-    north_on        = models.BooleanField()
+    north_call      = models.BooleanField(default=0)
+    north_on        = models.BooleanField(default=0)
 
-    south_call      = models.BooleanField()
-    south_on        = models.BooleanField()
+    south_call      = models.BooleanField(default=0)
+    south_on        = models.BooleanField(default=0)
 
     def __str__(self):
         return """
