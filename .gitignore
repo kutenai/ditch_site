@@ -5,3 +5,4 @@ freeze.txt
 reload.me
 env.txt
 ditch/local_config.py
+paramiko.log

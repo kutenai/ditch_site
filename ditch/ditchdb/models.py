@@ -9,11 +9,13 @@ class DitchCal(models.Model):
     measured values to actual values.
     """
 
-    ditch_slope     = models.FloatField()
-    ditch_scale     = models.FloatField()
+    ditch_slope     = models.FloatField(default=-0.0106)
+    ditch_scale     = models.FloatField(default=14.0)
+    ditch_empty     = models.FloatField(default=720)
+    ditch_alarm     = models.FloatField(default=50)
 
-    sump_slope      = models.FloatField()
-    sump_scale      = models.FloatField()
+    sump_slope      = models.FloatField(default=-3.034)
+    sump_scale      = models.FloatField(default=0.037)
 
 @python_2_unicode_compatible
 class DitchLog(models.Model):
