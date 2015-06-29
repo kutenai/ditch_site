@@ -161,7 +161,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.webdesign',
-    'django.contrib.comments',
 
     'django_forms_bootstrap',
     'pinax_theme_bootstrap',
@@ -169,7 +168,6 @@ INSTALLED_APPS = (
 
     'rest_framework',
     'account',
-    'south',
     'bootstrap',
 
     'ditch',

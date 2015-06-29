@@ -1,0 +1,4 @@
+flower==0.8.2
+gnureadline==6.3.3
+gunicorn==19.3.0
+ipython==3.2.0
