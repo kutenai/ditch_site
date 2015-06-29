@@ -10,6 +10,8 @@ app.controller('DitchController',
         function($scope, $http,$interval) {
             $scope.info = {
                 ditch_inches: 12.3,
+                ditch_empty: false,
+                ditch_alarm: false,
                 sump_inches:  19.1,
                 pump_on:      false,
                 north_on:     false,
@@ -20,6 +22,10 @@ app.controller('DitchController',
                 ditch_reading: 0.0,
                 sump_reading: 0.0
             };
+            $scope.ditch = {
+                level: "empty",
+                alarm: 'Okay'
+            }
 
             $scope.states = {
                 'north' : { label: 'North On', call: false },
@@ -29,6 +35,18 @@ app.controller('DitchController',
 
             function onStatus(status) {
                 $scope.info = status;
+                var d = $scope.ditch;
+                var i = $scope.info;
+
+                d.alaram ='okay';
+                if (i.ditch_empty) {
+                    d.level = 'empty';
+                } else if (i.ditch_alaram) {
+                    d.alaram ='ALARMED';
+                    d.level = 'FULL';
+                } else {
+                    d.level = i.ditch_inches;
+                }
 
                 _.each(['north','south','pump'], function(zone) {
                     var call = status[zone+"_call"];

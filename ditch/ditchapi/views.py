@@ -33,6 +33,8 @@ class StatusView(NeverCacheMixin,BASEAPIListView):
                 'ditch_reading': dlvl,
                 'sump_reading' : slvl,
                 'ditch_inches' : self.cal.ditch_inches(dlvl),
+                'ditch_empty'  : self.cal.check_empty(dlvl),
+                'ditch_alarm'  : self.cal.check_alarm(dlvl),
                 'sump_inches'  : self.cal.sump_inches(slvl),
                 'pump_on'      : full_status.get('P','0') == '1',
                 'north_on'     : full_status.get('N','0') == '1',
@@ -41,6 +43,10 @@ class StatusView(NeverCacheMixin,BASEAPIListView):
                 'north_call'   : full_status.get('NC','0') == '1',
                 'south_call'   : full_status.get('SC','0') == '1'
             }
+
+            if self.cal.check_alarm(dlvl):
+                # Send a notification
+                pass
 
 
         except Exception as e:
