@@ -94,7 +94,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Set your DSN value
@@ -165,6 +165,7 @@ INSTALLED_APPS = (
     'django_forms_bootstrap',
     'pinax_theme_bootstrap',
     'bootstrapform',
+    'compressor',
 
     'rest_framework',
     'account',

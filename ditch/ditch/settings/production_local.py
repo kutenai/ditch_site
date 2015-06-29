@@ -19,3 +19,6 @@ ALLOWED_HOSTS = (
     '127.0.0.1',
 )
 
+COMPRESS_PRECOMPILERS = (
+    ('text/less', '/usr/local/bin/node /usr/local/bin/lessc --clean-css --clean-option=--keep-line-breaks {infile} {outfile}'),
+)

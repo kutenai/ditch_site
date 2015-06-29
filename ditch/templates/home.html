@@ -24,6 +24,12 @@
             <li>Ditch Reading:<span ng-bind="info.ditch_reading"></span></li>
             <li>Sump Reading:<span ng-bind="info.sump_reading"></span></li>
         </ul>
+
+    </div>
+
+    <div id="ditch_level">
+        Ditch Level
+
     </div>
 
 {% endblock body %}
@@ -35,8 +41,11 @@
     <script type="text/javascript" src="{% static 'js/angular/controllers/DitchController.js' %}"></script>
 {% endblock %}
 
+
 {% block ditch_script %}
     {{ block.super }}
+
+    <script src="http://code.highcharts.com/highcharts.js" charset="utf-8"></script>
 
     <script type="text/javascript">
     var DitchParams = (typeof DitchParams  == 'undefined') ? {} : DitchParams;
