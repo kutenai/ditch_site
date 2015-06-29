@@ -19,6 +19,11 @@
             <li>South Status:<span ng-bind="info.south_on"></span> Call:<span ng-bind="info.south_call"></span></li>
         </ul>
 
+        <p>Ditch Levels</p>
+        <div id="ditch_level">
+
+        </div>
+
         <p>Technical Details</p>
         <ul>
             <li>Ditch Reading:<span ng-bind="info.ditch_reading"></span></li>
@@ -27,10 +32,6 @@
 
     </div>
 
-    <div id="ditch_level">
-        Ditch Level
-
-    </div>
 
 {% endblock body %}
 
@@ -48,12 +49,11 @@
     <script src="http://code.highcharts.com/highcharts.js" charset="utf-8"></script>
 
     <script type="text/javascript">
-    var DitchParams = (typeof DitchParams  == 'undefined') ? {} : DitchParams;
-    DitchParams = _.extend(
-            {
-                statusPollRate : {{ ditch_poll_rate }}
-            },DitchParams);
-
+        var DitchParams = (typeof DitchParams  == 'undefined') ? {} : DitchParams;
+        DitchParams = _.extend(
+                {
+                    statusPollRate : {{ ditch_poll_rate }}
+                }, DitchParams);
     </script>
 
 

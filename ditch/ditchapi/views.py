@@ -2,12 +2,14 @@ from django.shortcuts import render
 
 import json
 import redis
+from datetime import datetime, timedelta
 
 from ditchlib.generic.view import BASEAPIListView,CSRF_Exempt_View
 from ditchlib.util.view import LoginReqMixin
 from ditchlib.calibration import DitchCalibration
 from ditchlib.mixins import NeverCacheMixin
 from ditchlib.Ditch.Controller import DitchController
+from ditchdb.models import DitchLog
 
 from ditchtasks.tasks import status,north_enable,south_enable,pump_enable
 
@@ -90,5 +92,21 @@ class PumpControl(DitchController, CSRF_Exempt_View):
         self.pumpEnable(bOn)
 
         return self.process_response({})
+
+class HistoryView(CSRF_Exempt_View):
+    """
+    Return the history of the ditch levels.
+    """
+
+    def get(self, request):
+
+        days_30 = datetime.now().date() + timedelta(days=-30)
+        log = DitchLog.objects.filter(timestamp__gte=days_30).values_list('timestamp', 'ditch_inches', 'sump_inches')
+        if log.count() == 0:
+            log = DitchLog.objects.all().values_list('timestamp', 'ditch_inches', 'sump_inches')
+
+        return self.process_response(log)
+
+
 
 

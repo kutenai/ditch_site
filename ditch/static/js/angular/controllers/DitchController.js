@@ -25,7 +25,7 @@ app.controller('DitchController',
             $scope.ditch = {
                 level: "empty",
                 alarm: 'Okay'
-            }
+            };
 
             $scope.states = {
                 'north' : { label: 'North On', call: false },
@@ -69,6 +69,70 @@ app.controller('DitchController',
                     onStatus(data);
                 });
             }, DitchParams.statusPollRate);
+
+
+            var history_token = null;
+            var chart_data = {
+                'timestamp': [],
+                'ditch': [],
+                'sump': []
+            };
+
+            var chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'ditch_level',
+                    type: 'line'
+                },
+                title: {
+                    text: 'Ditch Levels'
+                },
+                xAxis: {
+                    time: chart_data.timestamps,
+                },
+                yAxis: {
+                    title: {
+                        text: 'Ditch Level (in)'
+                    }
+                },
+                series: [{
+                    name: 'Ditch Level',
+                    data: chart_data.ditch
+                }, {
+                    name: 'Sump Levels',
+                    data: chart_data.sump
+                }]
+            });
+
+            function onHistory(data) {
+                //history_token = data.token;
+
+                var ts = [];
+                var dl = [];
+                var sl = [];
+
+                _.each(data, function(item) {
+                    ts.push(item[0]);
+                    dl.push(item[1]);
+                    sl.push(item[2]);
+                });
+
+                //chart.xAxis.addPoint(ts[0]);
+                chart.series[0].addPoint([ts[0], dl[0]]);
+                chart.series[1].addPoint([ts[0], sl[0]]);
+
+            }
+
+            $http.get('/api/v1/history/').success(function (data) {
+                onHistory(data);
+            });
+
+
+            $interval(function () {
+                $http.get('/api/v1/history/').success(function (data) {
+                    onHistory(data);
+                });
+            }, DitchParams.statusPollRate);
+
 
             console.log("Polling every " + DitchParams.statusPollRate + " milliseconds.");
 
