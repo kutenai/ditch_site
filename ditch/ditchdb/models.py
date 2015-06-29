@@ -22,6 +22,8 @@ class DitchLog(models.Model):
     timestamp       = models.DateTimeField(auto_now=True)
     ditchlvl        = models.IntegerField()
     sumplvl         = models.IntegerField()
+    ditch_inches    = models.FloatField()
+    sump_inches    = models.FloatField()
     pump_call       = models.BooleanField()
     pump_on         = models.BooleanField()
 
