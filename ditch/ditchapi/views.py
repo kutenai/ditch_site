@@ -7,6 +7,7 @@ from ditchlib.generic.view import BASEAPIListView,CSRF_Exempt_View
 from ditchlib.util.view import LoginReqMixin
 from ditchlib.calibration import DitchCalibration
 from ditchlib.mixins import NeverCacheMixin
+from ditchlib.Ditch.Controller import DitchController
 
 from ditchtasks.tasks import status,north_enable,south_enable,pump_enable
 
@@ -18,7 +19,7 @@ class StatusView(NeverCacheMixin,BASEAPIListView):
 
     def get(self,request):
 
-        r = redis.StrictRedis(host='gardenbuzz.com', port=6379, db=3)
+        r = redis.StrictRedis(host='gardenbuzz.com', port=6379, db=5)
 
         try:
             stat = r.get('ditch_status')
@@ -59,7 +60,7 @@ class StatusView(NeverCacheMixin,BASEAPIListView):
         response = self.process_response(ditch_status)
         return response
 
-class ZoneControl(CSRF_Exempt_View):
+class ZoneControl(DitchController, CSRF_Exempt_View):
 
 
     def post(self,request,zone='north',onoff='on'):
@@ -68,20 +69,19 @@ class ZoneControl(CSRF_Exempt_View):
 
         if zone == 'north':
             print("Calling task:%s" % north_enable.name)
-            north_enable.delay(bOn)
+            self.northEnable(bOn)
         else:
             print("Calling task:%s" % south_enable.name)
-            south_enable.delay(bOn)
+            self.southEnable(bOn)
 
         return self.process_response({})
 
-class PumpControl(CSRF_Exempt_View):
+class PumpControl(DitchController, CSRF_Exempt_View):
 
     def post(self,request,onoff='on'):
 
         bOn = onoff == 'on'
-
-        pump_enable.delay(bOn)
+        self.pumpEnable(bOn)
 
         return self.process_response({})
 
