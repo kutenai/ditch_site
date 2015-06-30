@@ -100,12 +100,22 @@ class HistoryView(CSRF_Exempt_View):
 
     def get(self, request):
 
-        days_30 = datetime.now().date() + timedelta(days=-30)
-        log = DitchLog.objects.filter(timestamp__gte=days_30).values_list('timestamp', 'ditch_inches', 'sump_inches')
-        if log.count() == 0:
-            log = DitchLog.objects.all().values_list('timestamp', 'ditch_inches', 'sump_inches')
+        start_at = request.GET.get('start_at', None)
 
-        return self.process_response(log)
+        if start_at:
+            log = DitchLog.objects.filter(timestamp__gt=start_at).values_list('timestamp', 'ditch_inches', 'sump_inches')
+        else:
+            days_30 = datetime.now().date() + timedelta(days=-30)
+            log = DitchLog.objects.filter(timestamp__gte=days_30).values_list('timestamp', 'ditch_inches', 'sump_inches')
+
+            if log.count() == 0:
+                log = DitchLog.objects.all().values_list('timestamp', 'ditch_inches', 'sump_inches')
+
+        results = {'data': log}
+        if len(log):
+            results['newest'] = log[len(log)-1][0]
+
+        return self.process_response(results)
 
 
 

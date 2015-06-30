@@ -7,10 +7,10 @@ from ditchlib.util.apiutils import JSONResponse
 class BASEAPIListView(base.View):
 
     def __init__(self, *args, **kwargs):
-        self.response = JSONResponse
+        super(BASEAPIListView, self).__init__(*args, **kwargs)
 
     def process_response(self, data, value=''):
-        return self.response(data, value)
+        return JSONResponse(data, value)
 
 
 class CSRF_Exempt_View(BASEAPIListView):

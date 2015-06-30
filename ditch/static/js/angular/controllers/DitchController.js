@@ -71,7 +71,7 @@ app.controller('DitchController',
             }, DitchParams.statusPollRate);
 
 
-            var history_token = null;
+            var history_last = null;
             var chart_data = {
                 'timestamp': [],
                 'ditch': [],
@@ -106,19 +106,24 @@ app.controller('DitchController',
             function onHistory(data) {
                 //history_token = data.token;
 
-                var ts = [];
-                var dl = [];
-                var sl = [];
+                if (data.newest) {
+                    history_last = data.newest;
+                }
+                var log = data.data;
 
-                _.each(data, function(item) {
-                    ts.push(item[0]);
-                    dl.push(item[1]);
-                    sl.push(item[2]);
+                //var ts = [];
+                //var dl = [];
+                //var sl = [];
+
+                _.each(log, function(item) {
+                    chart.series[0].addPoint([item[0], item[1]]);
+                    chart.series[1].addPoint([item[0], item[2]]);
+                    //ts.push(item[0]);
+                    //dl.push(item[1]);
+                    //sl.push(item[2]);
                 });
 
                 //chart.xAxis.addPoint(ts[0]);
-                chart.series[0].addPoint([ts[0], dl[0]]);
-                chart.series[1].addPoint([ts[0], sl[0]]);
 
             }
 
@@ -128,7 +133,7 @@ app.controller('DitchController',
 
 
             $interval(function () {
-                $http.get('/api/v1/history/').success(function (data) {
+                $http.get('/api/v1/history?start_at='+history_last).success(function (data) {
                     onHistory(data);
                 });
             }, DitchParams.statusPollRate);
